@@ -17,8 +17,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "groupr"
   gem.homepage = "http://github.com/allynfolksjr/groupr"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Gem used to interact with University of Washington Groups Service}
+  gem.description = %Q{Gem used to interact with University of Washington Groups Service}
   gem.email = "nikky@uw.edu"
   gem.authors = ["Nikky Southerland"]
   # dependencies defined in Gemfile

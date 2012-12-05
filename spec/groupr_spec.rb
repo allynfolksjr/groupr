@@ -1,7 +1,8 @@
 require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
 
 describe "Groupr" do
-  it "fails" do
-    fail "hey buddy, you should probably rename this file and start specing for real"
-  end
+	it "Instantiates a new instance of groupr" do
+		@group = Groupr.new
+	end
+	it "Loads a certificate"
 end
