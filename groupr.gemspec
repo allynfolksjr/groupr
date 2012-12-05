@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
     "README.rdoc",
     "Rakefile",
     "VERSION",
+    "groupr.gemspec",
     "lib/groupr.rb",
     "spec/groupr_spec.rb",
     "spec/spec_helper.rb"
