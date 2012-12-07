@@ -4,8 +4,8 @@ describe "Groupr" do
 
 	before do
 		@group = Groupr.new
-		@group.certificate = File.read("#{ENV['HOME']}/nikky_cac_washington_edu.cert")
-		@group.key = File.read("#{ENV['HOME']}/nikky_cac_washington_edu.key")
+		# @group.certificate = File.read("#{ENV['HOME']}/nikky_cac_washington_edu.cert")
+		# @group.key = File.read("#{ENV['HOME']}/nikky_cac_washington_edu.key")
 	end
 
 	it "Checks for network connectivity"
