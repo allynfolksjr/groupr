@@ -1,4 +1,4 @@
-{<img src="https://travis-ci.org/allynfolksjr/groupr.png" />}[https://travis-ci.org/allynfolksjr/groupr]]
+{<img src="https://travis-ci.org/allynfolksjr/groupr.png" />}[https://travis-ci.org/allynfolksjr/groupr]
 
 = groupr
 
