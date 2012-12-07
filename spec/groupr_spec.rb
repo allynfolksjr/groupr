@@ -34,7 +34,7 @@ describe "Groupr" do
 
 	context "#view_group" do
 		before do
-			@group.should_receive(:make_get_request).and_return(File.open('view_group.html'))
+			@group.should_receive(:make_get_request).and_return(File.open('spec/sample_responses/view_group.html'))
 			@results = @group.view_group("u_nikky_git")
 		end
 		it "Should tell you the group name" do

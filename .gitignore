@@ -1,5 +1,4 @@
 testr.rb
-*.html
 # rcov generated
 coverage
 coverage.data
