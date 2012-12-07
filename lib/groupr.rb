@@ -18,29 +18,30 @@ class Groupr
 			request = Net::HTTP::Get.new(@uri.request_uri)
 			@response = http.request(request)
 		end
-		validate_response(@response)
+		@response.body
 	end
 	# This method returns nil if the http request doesn't return a 200. Maybe also support for not-authorized?
-	def validate_response(response)
-		nil if response.code.to_i != 200
-		response.body if response.code.to_i == 200
+	# def validate_response(response)
+	# 	nil if get_response_code != 200
+	# 	response.body if get_response_code == 200
+	# end
+	def get_response_code
+		@response.code.to_i
 	end
 	def group_exists?(group)
 		@uri = URI.parse("#{@api_url}/group/#{group}")
 		make_get_request
-		if @response.code.to_i == 200
+		if get_response_code == 200
 			true
 		else
 			false
 		end
 	end
 	
-
-
 	def view_group(group)
 		@uri = URI.parse("#{@api_url}/group/#{group}")
-		make_get_request
-		@doc = Nokogiri::HTML(@response.body)
+		body = make_get_request
+		@doc = Nokogiri::HTML(body)
 		{
 			title: get_title,
 			description: get_description,
@@ -49,8 +50,6 @@ class Groupr
 			contact: get_contact
 		}
 	end
-
-
 
 	def get_contact
 		@doc.xpath('//span[@class="contact"]').text
@@ -68,8 +67,6 @@ class Groupr
 	def get_regid
 		@doc.xpath('//span[@class="regid"]').text
 	end
-
-
 
 	# def other thing to use
 	# http.ssl_timeout

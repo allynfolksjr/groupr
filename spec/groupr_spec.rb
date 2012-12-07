@@ -19,17 +19,22 @@ describe "Groupr" do
 		@group.respond_to?(:key).should eq true
 	end
 
-	context "#groupexists?" do
+	context "#group_exists?" do
 		it "Should tell you that the uw_employees group exists" do
+			@group.should_receive(:make_get_request).and_return(nil)
+			@group.should_receive(:get_response_code).and_return(200)
 			@group.group_exists?("u_nikky_git").should be_true
 		end
 		it "Should tell you that the a_team group does not exist" do
+			@group.should_receive(:make_get_request).and_return(nil)
+			@group.should_receive(:get_response_code).and_return(404)
 			@group.group_exists?("a_team").should be_false
 		end
 	end
 
 	context "#view_group" do
 		before do
+			@group.should_receive(:make_get_request).and_return(File.open('view_group.html'))
 			@results = @group.view_group("u_nikky_git")
 		end
 		it "Should tell you the group name" do
