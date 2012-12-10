@@ -4,7 +4,7 @@
 
 Groupr provides an interface to the University of Washington Groups Service, which allows administrators to leverage a simple yet robust groups system for access control for applications campus-wide.
 
-Groupr strives to followly closely to the naming conventions and functions as outlined in the Groups Service documentation, but does expand certain functionality, notably adding the `group_exist?` method to verify that a group exists.
+Groupr strives to followly closely to the naming conventions and functions as outlined in the Groups Service documentation, but does expand certain functionality, notably adding the <tt>group_exist?</tt> method to verify that a group exists.
 
 == Features
 
@@ -33,15 +33,15 @@ Groupr is designed to work with a very specific application API, and is likely n
 
 Once the conditions as outlined in "system requirements" are met, this gem can be utilized. 
 
-`testr = Groupr.new
+<tt>testr = Groupr.new
 testr.key = "path to key file"
 testr.cert = "path to certificate file"
 testr.group_exists?("u_nikky_awesome")
-testr.create_group("u_nikky_yeast-lords")`
+testr.create_group("u_nikky_yeast-lords")</tt>
 
 By default, it will look for a UWCA root file in ~/uwca.crt. You can manually change this by running:
 
-`testr.ua_ca_file = "path to uwca root certificate"`
+<tt>testr.ua_ca_file = "path to uwca root certificate"</tt>
 
 == Version History
 
