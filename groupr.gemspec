@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = "groupr"
-  s.version = "0.1.1"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nikky Southerland"]
@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   s.files = [
     ".document",
     ".rspec",
+    ".travis.yml",
     "Gemfile",
     "LICENSE.txt",
     "README.rdoc",
@@ -27,6 +28,7 @@ Gem::Specification.new do |s|
     "groupr.gemspec",
     "lib/groupr.rb",
     "spec/groupr_spec.rb",
+    "spec/sample_responses/view_group.html",
     "spec/spec_helper.rb"
   ]
   s.homepage = "http://github.com/allynfolksjr/groupr"

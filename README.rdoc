@@ -2,17 +2,67 @@
 
 = groupr
 
-Description goes here.
+Groupr provides an interface to the University of Washington Groups Service, which allows administrators to leverage a simple yet robust groups system for access control for applications campus-wide.
 
-== Contributing to groupr
- 
-* Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
-* Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it.
-* Fork the project.
-* Start a feature/bugfix branch.
-* Commit and push until you are happy with your contribution.
-* Make sure to add tests for it. This is important so I don't break it in a future version unintentionally.
-* Please try not to mess with the Rakefile, version, or history. If you want to have your own version, or is otherwise necessary, that is fine, but please isolate to its own commit so I can cherry-pick around it.
+Groupr strives to followly closely to the naming conventions and functions as outlined in the Groups Service documentation, but does expand certain functionality, notably adding the `group_exist?` method to verify that a group exists.
+
+== Features
+
+* Ability to check if a group exists via Groupr#group_exists?
+* Get title, description, name, regid, and contact of a group via Groupr#view_group
+* Create a group and optionally add a description via Groupr#create_group
+* Option to manually specify a different API url; useful if new or testing versions of the Groups Service API become available.
+
+== System Requirements
+
+Groupr is designed to work with a very specific application API, and is likely not useful to users not affiliated with the University of Washington. It is designed to work with a system that has:
+
+* A static UW-assigned DNS hostname, such as hiigara.cac.washington.edu
+* An X509 certificate signed by the UW Certificate Authority (UW CA)
+* A copy of the UW CA root
+* Permissions assigned to a stem that it is working in.
+
+=== Note on Permissions
+
+* This utilizes the hostname-based feature of the UW groups service. this hostname is the one assigned to you by the UW Network Operations center, and should be the same as the X509 certificate hostname as outlined above.
+* When working on a group that is already created, you must assign this hsotname to one of the permissions available to you. For instance, if working on the 'u_nikky_awesome' group, you must allow 'hiigara.cac.washington.edu' as an administrator if you want to give this host full access to that group.
+* When creating new groups, this host is automatically added as an administrator. You can remove this after creating the group, if desired.
+* The host in question must have <insert permissions here> in order to create new groups. For instance, if 'hiigara.cac.washington.edu' has subgroup permissions for the 'u_nikky' stem, it can create subgroups such as 'u_nikky_awesomeo'
+
+== Instructions
+
+Once the conditions as outlined in "system requirements" are met, this gem can be utilized. 
+
+`testr = Groupr.new
+testr.key = "path to key file"
+testr.cert = "path to certificate file"
+testr.group_exists?("u_nikky_awesome")
+testr.create_group("u_nikky_yeast-lords")`
+
+By default, it will look for a UWCA root file in ~/uwca.crt. You can manually change this by running:
+
+`testr.ua_ca_file = "path to uwca root certificate"`
+
+== Version History
+
+=== 0.2.0
+
+Initial documented release.
+
+=== 0.1.0
+
+Initial public release; undocumented.
+
+== Known Issues
+
+* Current error handling is sparse
+* Many features not implemented
+* Many optional features of current functions not implemented
+
+== To-do
+
+* Continue to expand current available options
+* Additional error handling checks
 
 == Copyright
 
