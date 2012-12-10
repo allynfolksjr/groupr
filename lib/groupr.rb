@@ -8,11 +8,7 @@ class Groupr
     @uw_ca_file = "#{ENV['HOME']}/uwca.crt"
   end
 
-  # This method returns nil if the http request doesn't return a 200. Maybe also support for not-authorized?
-  # def validate_response(response)
-  # 	nil if get_response_code != 200
-  # 	response.body if get_response_code == 200
-  # end
+  public
   def get_response_code
     @response.code.to_i
   end
@@ -87,6 +83,22 @@ class Groupr
   	@group = group
   	description.nil? ? @description = group : @description = description 
     @uri = URI.parse("#{@api_url}/group/#{group}")
+    @request_text = %Q{<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
+      "http://www.w3.org/TR/xhtml11/DTD/xhtml11/dtd">
+    <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+    <head>
+    <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"/>
+    </head>
+    <body>
+        <div class="group">
+        <span class="description">#{@description}</span>
+          <ul class="names"><li class="name">#{@group}</li></ul>
+          <ul class="admins">
+              <li class="admin">nikky</li>
+          </ul>
+        </div>
+    </body>
+  </html>}
     make_put_request
     get_response_code == 200 ? true : false
   end
@@ -111,6 +123,7 @@ class Groupr
 
 
   private
+  # This makes a get request against the groups service, useful for getting information
   def make_get_request
     options = {
       use_ssl: true,
@@ -125,7 +138,7 @@ class Groupr
     end
     @response.body
   end
-
+  # This makes a put request against the groups service, useful for pushing information
   def make_put_request
     options = {
       use_ssl: true,
@@ -136,49 +149,30 @@ class Groupr
     }
     Net::HTTP.start(@uri.host, @uri.port, options) do |http|
       request = Net::HTTP::Put.new(@uri.request_uri)
-      request.body = %Q{<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN"
-  		"http://www.w3.org/TR/xhtml11/DTD/xhtml11/dtd">
-		<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
-		<head>
- 		<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"/>
-		</head>
-		<body>
-  			<div class="group">
-   			<span class="description">#{@description}</span>
-    			<ul class="names"><li class="name">#{@group}</li></ul>
-    			<ul class="admins">
-        			<li class="admin">nikky</li>
-    			</ul>
-  			</div>
-		</body>
-	</html>}
+      request.body = @request_text
       @response = http.request(request)
     end
     puts "Response is: #{get_response_code}"
     puts "Body is: #{@response.body}"
     @response.body
   end
-
-  def get_response_code
-    @response.code.to_i
-  end
-
+  # Returns the contact information of a group
   def get_contact
     @doc.xpath('//span[@class="contact"]').text
   end
-
+  # Returns the group title
   def get_title
     @doc.xpath('//span[@class="title"]').text
   end
-
+  # Returns the group description
   def get_description
     @doc.xpath('//span[@class="description"]').text
   end
-
+  # Returns the group name
   def get_name
     @doc.xpath('//span[@class="name"]').text
   end
-
+  # Returns the unique group regid
   def get_regid
     @doc.xpath('//span[@class="regid"]').text
   end
