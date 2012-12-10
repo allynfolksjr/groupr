@@ -45,9 +45,9 @@ By default, it will look for a UWCA root file in ~/uwca.crt. You can manually ch
 
 == Version History
 
-=== 0.2.0
+=== 0.2.1
 
-Initial documented release.
+Initial documentation release
 
 === 0.1.0
 
