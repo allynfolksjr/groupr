@@ -2,7 +2,7 @@ require 'net/http'
 require 'nokogiri'
 class Groupr
   attr_accessor :api_url, :certificate, :key, :uw_ca_file
-  attr_reader :request
+  attr_reader :request, :status
   def initialize
     @api_url = "https://iam-ws.u.washington.edu:7443/group_sws/v2"
     @uw_ca_file = "#{ENV['HOME']}/uwca.crt"
@@ -26,7 +26,15 @@ class Groupr
 
 
   # https://wiki.cac.washington.edu/display/infra/Groups+WebService+Get+Members
-  def get_membership
+  def get_membership(group)
+    @uri = URI.parse("#{@api_url}/group/#{group}/member")
+    body = make_get_request
+    doc = Nokogiri::HTML(body)
+    members = []
+    doc.css('li').each do |m|
+      members << m.text
+    end
+    members
   end
 
   # https://wiki.cac.washington.edu/display/infra/Groups+WebService+Get+Effective+Members
@@ -108,7 +116,16 @@ class Groupr
   end
 
   # https://wiki.cac.washington.edu/display/infra/Groups+WebService+Delete+Group
-  def delete_group
+  def delete_group(group)
+    @uri = URI.parse("#{@api_url}/group/#{group}")
+    make_delete_request
+    if get_response_code == 200
+      @status = "Group deleted or not found"
+      true
+    else
+      @status = "No authorization"
+      false
+    end
   end
 
   ## Search
@@ -134,6 +151,21 @@ class Groupr
     }
     Net::HTTP.start(@uri.host, @uri.port, options) do |http|
       request = Net::HTTP::Get.new(@uri.request_uri)
+      @response = http.request(request)
+    end
+    @response.body
+  end
+  # This makes a delete request against the groups service, used for uh, deleting things
+  def make_delete_request
+    options = {
+      use_ssl: true,
+      cert: OpenSSL::X509::Certificate.new(@certificate),
+      key: OpenSSL::PKey::RSA.new(@key),
+      ca_file: @uw_ca_file,
+      verify_mode: OpenSSL::SSL::VERIFY_PEER
+    }
+    Net::HTTP.start(@uri.host, @uri.port, options) do |http|
+      request = Net::HTTP::Delete.new(@uri.request_uri)
       @response = http.request(request)
     end
     @response.body

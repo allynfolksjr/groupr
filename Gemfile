@@ -11,5 +11,5 @@ group :development do
   gem "rdoc"
   gem "bundler"
   gem "jeweler", "~> 1.8.4"
-  gem "simplecov"
+ # gem "simplecov"
 end

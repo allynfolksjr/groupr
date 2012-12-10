@@ -53,18 +53,41 @@ describe "Groupr" do
         @group.should_receive(:make_put_request).and_return(nil)
       end
       it "Should create a new group" do
-      	@group.should_receive(:get_response_code).and_return(200)
+        @group.should_receive(:get_response_code).and_return(200)
         @group.create_group("u_test_hi").should eq true
       end
       it "Should fail to create a new group if the response code is non-200" do
-      	@group.should_receive(:get_response_code).and_return(419)
-      	@group.create_group("u_test_hi").should eq false
+        @group.should_receive(:get_response_code).and_return(419)
+        @group.create_group("u_test_hi").should eq false
       end
-
     end
 
-    context "#get_members" do
-      it "Gets the members of a group"
+    context "#delete_group" do
+      before do
+        @group.should_receive(:make_delete_request).and_return(nil)
+      end
+      it "Should delete a currently existing group" do
+        @group.should_receive(:get_response_code).and_return(200)
+        @group.delete_group("u_test-group").should eq true
+        @group.status.should eq "Group deleted or not found"
+      end
+      it "Should return false upon fail" do
+        @group.should_receive(:get_response_code).and_return(412)
+        @group.delete_group("u_test_group").should eq false
+        @group.status.should eq "No authorization"
+      end
+    end
+  end
+  context "member operations" do
+
+    context "#get_membership" do
+      before do
+        @group.should_receive(:make_get_request).and_return(File.open("spec/sample_responses/get_membership.html"))
+      end
+      it "Gets the members of a group" do
+        @group.get_membership("u_nikky_awesome").should eq ["blogs", "blogsdev", "hiigara.cac.washington.edu", "nikky", "nikky.cac.washington.edu", "solanum.cac.washington.edu", "sqltest", "u_nikky_git", "webtest"]
+      end
+
     end
 
     context "#add_member" do
