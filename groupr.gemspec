@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "groupr"
-  s.version = "0.2.2"
+  s.version = "0.2.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Nikky Southerland"]
-  s.date = "2012-12-10"
+  s.date = "2012-12-11"
   s.description = "Gem used to interact with University of Washington Groups Service"
   s.email = "nikky@uw.edu"
   s.extra_rdoc_files = [
