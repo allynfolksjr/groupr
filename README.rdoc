@@ -39,10 +39,10 @@ Groupr is designed to work with a very specific application API, and is likely n
 
 Once the conditions as outlined in "system requirements" are met, this gem can be utilized. 
 
-	<code>testr = Groupr.new  
-	testr.key = "path to key file"  
-	testr.cert = "path to certificate file"  
-	testr.group_exists?("u_nikky_awesome")  
+	<code>testr = Groupr.new<br/>
+	testr.key = "path to key file"  <br/>
+	testr.cert = "path to certificate file" <br/> 
+	testr.group_exists?("u_nikky_awesome") <br/> 
 	testr.create_group("u_nikky_yeast-lords")</code>
 
 By default, it will look for a UWCA root file in ~/uwca.crt. You can manually change this by running:
