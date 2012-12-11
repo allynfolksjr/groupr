@@ -77,6 +77,9 @@ describe "Groupr" do
         @group.status.should eq "No authorization"
       end
     end
+    context "#update_group" do
+      it "Should let you edit the attributes of an already existing group"
+    end
   end
   context "member operations" do
 
@@ -84,18 +87,20 @@ describe "Groupr" do
       before do
         @group.should_receive(:make_get_request).and_return(File.open("spec/sample_responses/get_membership.html"))
       end
-      it "Gets the members of a group" do
+      it "Should get the members of a group" do
         @group.get_membership("u_nikky_awesome").should eq ["blogs", "blogsdev", "hiigara.cac.washington.edu", "nikky", "nikky.cac.washington.edu", "solanum.cac.washington.edu", "sqltest", "u_nikky_git", "webtest"]
       end
 
     end
-
-    context "#add_member" do
-      it "Adds a member to a group"
+    context "#get_effective_members" do
+      it "Should list the effective membership of a group"
+    end
+    context "#add_members" do
+      it "Should add member(s) to a group"
     end
 
-    context "#remove_member" do
-      it "Removes a member from a group"
+    context "#delete_members" do
+      it "Removes member(s) from a group"
     end
   end
 end
