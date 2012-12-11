@@ -6,20 +6,26 @@ Groupr provides an interface to the University of Washington Groups Service, whi
 
 Groupr strives to followly closely to the naming conventions and functions as outlined in the Groups Service documentation, but does expand certain functionality, notably adding the <tt>group_exist?</tt> method to verify that a group exists.
 
+General group service documentation: https://wiki.cac.washington.edu/x/hgVS
+
+Groups API Documentation: https://wiki.cac.washington.edu/x/ESBy
+
 == Features
 
 * Ability to check if a group exists via Groupr#group_exists?
 * Get title, description, name, regid, and contact of a group via Groupr#view_group
 * Create a group and optionally add a description via Groupr#create_group
+* Delete a group via Groupr#delete_group
+* List group members via Groupr#view_membership
 * Option to manually specify a different API url; useful if new or testing versions of the Groups Service API become available.
 
 == System Requirements
 
 Groupr is designed to work with a very specific application API, and is likely not useful to users not affiliated with the University of Washington. It is designed to work with a system that has:
 
-* A static UW-assigned DNS hostname, such as hiigara.cac.washington.edu
-* An X509 certificate signed by the UW Certificate Authority (UW CA)
-* A copy of the UW CA root
+* A static UW-assigned DNS hostname, such as hiigara.cac.washington.edu [http://www.washington.edu/computing/network/addresses.html]
+* An X509 certificate signed by the UW Certificate Authority (UW CA): [https://iam-tools.u.washington.edu/cs/]
+* A copy of the UW CA root [https://www.washington.edu/itconnect/security/ca/uwca.crt]
 * Permissions assigned to a stem that it is working in.
 
 === Note on Permissions
@@ -27,21 +33,23 @@ Groupr is designed to work with a very specific application API, and is likely n
 * This utilizes the hostname-based feature of the UW groups service. this hostname is the one assigned to you by the UW Network Operations center, and should be the same as the X509 certificate hostname as outlined above.
 * When working on a group that is already created, you must assign this hsotname to one of the permissions available to you. For instance, if working on the 'u_nikky_awesome' group, you must allow 'hiigara.cac.washington.edu' as an administrator if you want to give this host full access to that group.
 * When creating new groups, this host is automatically added as an administrator. You can remove this after creating the group, if desired.
-* The host in question must have <insert permissions here> in order to create new groups. For instance, if 'hiigara.cac.washington.edu' has subgroup permissions for the 'u_nikky' stem, it can create subgroups such as 'u_nikky_awesomeo'
+* The host in question must have subgroup create or administration permissions in order to create new groups. For instance, if 'hiigara.cac.washington.edu' has subgroup permissions for the 'u_nikky' stem, it can create subgroups such as 'u_nikky_awesomeo'
 
 == Instructions
 
 Once the conditions as outlined in "system requirements" are met, this gem can be utilized. 
 
-	testr = Groupr.new
+	<code>testr = Groupr.new
 	testr.key = "path to key file"
 	testr.cert = "path to certificate file"
 	testr.group_exists?("u_nikky_awesome")
-	testr.create_group("u_nikky_yeast-lords")</tt>
+	testr.create_group("u_nikky_yeast-lords")</code>
 
 By default, it will look for a UWCA root file in ~/uwca.crt. You can manually change this by running:
 
-	testr.ua_ca_file = "path to uwca root certificate"
+	<code>testr.ua_ca_file = "path to uwca root certificate"</code>
+
+In addition to getting all of the information from the HTTP request via Groupr#request, you can also view the return status message via Groupr#status.
 
 == Version History
 

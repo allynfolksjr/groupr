@@ -37,35 +37,35 @@ class Groupr
     members
   end
 
-  # https://wiki.cac.washington.edu/display/infra/Groups+WebService+Get+Effective+Members
-  def get_effective_membership
-  end
+  # # https://wiki.cac.washington.edu/display/infra/Groups+WebService+Get+Effective+Members
+  # def get_effective_membership
+  # end
 
-  # http://wiki.cac.washington.edu/display/infra/Groups+WebService+Update+Members
-  def update_membership
-  end
+  # # http://wiki.cac.washington.edu/display/infra/Groups+WebService+Update+Members
+  # def update_membership
+  # end
 
-  # http://wiki.cac.washington.edu/display/infra/Groups+WebService+Delete+Members
-  def delete_membership
-  end
+  # # http://wiki.cac.washington.edu/display/infra/Groups+WebService+Delete+Members
+  # def delete_membership
+  # end
 
-  ## Member-related methods
+  # ## Member-related methods
 
-  # http://wiki.cac.washington.edu/display/infra/Groups+WebService+Get+Member
-  def get_member
-  end
+  # # http://wiki.cac.washington.edu/display/infra/Groups+WebService+Get+Member
+  # def get_member
+  # end
 
-  # http://wiki.cac.washington.edu/display/infra/Groups+WebService+Get+Effective+Member
-  def get_effective_member
-  end
+  # # http://wiki.cac.washington.edu/display/infra/Groups+WebService+Get+Effective+Member
+  # def get_effective_member
+  # end
 
-  # http://wiki.cac.washington.edu/display/infra/Groups+WebService+Add+Member
-  def add_member
-  end
+  # # http://wiki.cac.washington.edu/display/infra/Groups+WebService+Add+Member
+  # def add_member
+  # end
 
-  # http://wiki.cac.washington.edu/display/infra/Groups+WebService+Delete+Member
-  def delete_member
-  end
+  # # http://wiki.cac.washington.edu/display/infra/Groups+WebService+Delete+Member
+  # def delete_member
+  # end
 
 
   ## Group-related methods. View, create, update, delete.
@@ -128,15 +128,15 @@ class Groupr
     end
   end
 
-  ## Search
+  # ## Search
 
-  # http://wiki.cac.washington.edu/display/infra/Groups+WebService+Search
-  def search
-  end
+  # # http://wiki.cac.washington.edu/display/infra/Groups+WebService+Search
+  # def search
+  # end
 
-  # http://wiki.cac.washington.edu/display/infra/Groups+WebService+Get+History
-  def get_history
-  end
+  # # http://wiki.cac.washington.edu/display/infra/Groups+WebService+Get+History
+  # def get_history
+  # end
 
 
   private
