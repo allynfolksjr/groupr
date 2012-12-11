@@ -188,25 +188,12 @@ class Groupr
     puts "Body is: #{@response.body}"
     @response.body
   end
-  # Returns the contact information of a group
-  def get_contact
-    @doc.xpath('//span[@class="contact"]').text
-  end
-  # Returns the group title
-  def get_title
-    @doc.xpath('//span[@class="title"]').text
-  end
-  # Returns the group description
-  def get_description
-    @doc.xpath('//span[@class="description"]').text
-  end
-  # Returns the group name
-  def get_name
-    @doc.xpath('//span[@class="name"]').text
-  end
-  # Returns the unique group regid
-  def get_regid
-    @doc.xpath('//span[@class="regid"]').text
+
+  # Creates some basic methods to pull common classes out
+  %w(contact title description name regid).each do |element|
+    define_method("get_#{element}") do
+      @doc.xpath("//span[@class=\"#{element}\"]").text
+    end
   end
 
 end
