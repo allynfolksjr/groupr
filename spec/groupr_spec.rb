@@ -81,7 +81,7 @@ describe "Groupr" do
       it "Should let you edit the attributes of an already existing group"
     end
   end
-  context "member operations" do
+  context "membership operations" do
 
     context "#get_membership" do
       before do
@@ -92,8 +92,13 @@ describe "Groupr" do
       end
 
     end
-    context "#get_effective_members" do
-      it "Should list the effective membership of a group"
+    context "#get_effective_membership" do
+      before do
+        @group.should_receive(:make_get_request).and_return(File.open("spec/sample_responses/get_effective_membership.html"))
+      end
+      it "Should list the effective membership of a group" do
+        @group.get_effective_membership("u_nikky_awesome").should eq ["blogs", "blogsdev", "hiigara.cac.washington.edu", "nikky", "nikky.cac.washington.edu", "solanum.cac.washington.edu", "sqltest", "webtest"]
+      end
     end
     context "#add_members" do
       it "Should add member(s) to a group"

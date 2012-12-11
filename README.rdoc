@@ -1,4 +1,4 @@
-{<img src="https://travis-ci.org/allynfolksjr/groupr.png" />}[https://travis-ci.org/allynfolksjr/groupr]
+{<img src="https://api.travis-ci.org/allynfolksjr/groupr.png?branch=master" />}[https://travis-ci.org/allynfolksjr/groupr]
 
 = groupr
 
@@ -39,11 +39,11 @@ Groupr is designed to work with a very specific application API, and is likely n
 
 Once the conditions as outlined in "system requirements" are met, this gem can be utilized. 
 
-	<code>testr = Groupr.new
+	<pre><code>testr = Groupr.new
 	testr.key = "path to key file"
 	testr.cert = "path to certificate file" 
 	testr.group_exists?("u_nikky_awesome") 
-	testr.create_group("u_nikky_yeast-lords")</code>
+	testr.create_group("u_nikky_yeast-lords")</code></pre>
 
 By default, it will look for a UWCA root file in ~/uwca.crt. You can manually change this by running:
 
@@ -52,6 +52,14 @@ By default, it will look for a UWCA root file in ~/uwca.crt. You can manually ch
 In addition to getting all of the information from the HTTP request via Groupr#request, you can also view the return status message via Groupr#status.
 
 == Version History
+
+=== 0.2.5
+
+Add Groupr#get_effective_membership
+
+=== 0.2.4
+
+Code refactoring and refinements
 
 === 0.2.2
 

@@ -2,7 +2,7 @@ require 'net/http'
 require 'nokogiri'
 class Groupr
   attr_accessor :api_url, :certificate, :key, :uw_ca_file
-  attr_reader :request, :status
+  attr_reader :response, :status
   def initialize
     @api_url = "https://iam-ws.u.washington.edu:7443/group_sws/v2"
     @uw_ca_file = "#{ENV['HOME']}/uwca.crt"
@@ -38,8 +38,16 @@ class Groupr
   end
 
   # # https://wiki.cac.washington.edu/display/infra/Groups+WebService+Get+Effective+Members
-  # def get_effective_membership
-  # end
+  def get_effective_membership(group)
+    @uri = URI.parse("#{@api_url}/group/#{group}/effective_member")
+    body = make_get_request
+    doc = Nokogiri::HTML(body)
+    members = []
+    doc.xpath('//a[@class="effective_member"]').each do |m|
+      members << m.text
+    end
+    members
+  end
 
   # # http://wiki.cac.washington.edu/display/infra/Groups+WebService+Update+Members
   # def update_membership
