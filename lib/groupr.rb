@@ -31,7 +31,7 @@ class Groupr
     body = make_get_request
     doc = Nokogiri::HTML(body)
     members = []
-    doc.css('li').each do |m|
+    doc.xpath('//a[@class="member"]').each do |m|
       members << m.text
     end
     members
